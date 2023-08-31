@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 from storage import Storage
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__, static_folder='easymine')
+app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace with a secure secret key
 
 bcrypt = Bcrypt()
