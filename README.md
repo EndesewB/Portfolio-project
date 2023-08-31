@@ -1,1 +1,1 @@
-Easymine project comming soon
+Easymine project one-click solution for Ethereum mining
