@@ -1,11 +1,16 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-from storage import Storage
-from flask_bcrypt import Bcrypt
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+import json
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace with a secure secret key
 
-bcrypt = Bcrypt()
+# Function to load user data from data.json
+def load_user_data():
+    try:
+        with open('data.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
 @app.route('/')
 def index():
@@ -21,28 +26,59 @@ def signup():
     if password != confirm_password:
         return jsonify({'error': 'Passwords do not match'}), 400
 
-    storage = Storage()
-    if not storage.add_user(username, email, password):
+    users = load_user_data()
+    if username in users:
         return jsonify({'error': 'Username already exists'}), 400
-    
+
+    users[username] = {'email': email, 'password': password}
+
+    with open('data.json', 'w') as file:
+        json.dump(users, file, indent=4)
+
     session['username'] = username
-    
-    return jsonify({'message': 'User registered successfully'}), 200
+    return render_template('dashboard.html', username=username)
 
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    storage = Storage()
-    matched_user = storage.get_user_by_username(username)
+    users = load_user_data()
+    matched_user = users.get(username)
 
-    if matched_user is None or not bcrypt.check_password_hash(matched_user['password'], password):
+    if matched_user is None or matched_user['password'] != password:
         return jsonify({'error': 'Invalid username or password'}), 401
-    
-    session['username'] = username
 
+    session['username'] = username
     return jsonify({'message': 'Login successful', 'username': username}), 200
+
+@app.route('/dashboard')
+def dashboard():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+
+    users = load_user_data()
+    user_data = users.get(username)
+
+    if user_data:
+        stored_password = user_data.get('password')
+        print(stored_password)
+        password = request.form.get('password')
+        print(password)
+        
+        if stored_password == password:
+            return render_template('dashboard.html', username=username)
+        else:
+            return jsonify({'error': 'Invalid username or password'}), 401
+        
+    return "User not found"
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

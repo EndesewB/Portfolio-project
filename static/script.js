@@ -1,56 +1,66 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const navigationLinks = document.querySelectorAll('.navigation a');
-  const sections = document.querySelectorAll('section');
+    const navigationLinks = document.querySelectorAll('.navigation a');
+    const sections = document.querySelectorAll('section');
 
-  navigationLinks.forEach(link => {
-      link.addEventListener('click', function (event) {
-          event.preventDefault(); // Prevent the default link behavior
-          const targetId = this.getAttribute('href'); // Get the target section's ID
-          const targetSection = document.querySelector(targetId);
-          const aboutContent = targetSection.querySelector('.toggle-content'); // Add a class to the content to toggle
-  
-          // Hide all sections
-          sections.forEach(section => {
-              section.style.display = 'none';
-          });
-  
-          // Toggle the visibility of the content in the clicked section
-          if (aboutContent) {
-              if (aboutContent.style.display === 'none' || aboutContent.style.display === '') {
-                  aboutContent.style.display = 'block';
-              } else {
-                  aboutContent.style.display = 'none';
-              }
-          }
-  
-          // Show the target section
-          targetSection.style.display = 'block';
-      });
-  });
+    // Function to hide all sections except the target section
+    function showSection(targetId) {
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            targetSection.style.display = 'block';
+        }
+    }
 
-  // Add the new code to display the welcome message and "Start Mine" button
-  const loginForm = document.querySelector('#login form');
-  const welcomeMessage = document.createElement('p');
-  const startMineButton = document.createElement('button');
-  
-  loginForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      
-      const formData = new FormData(loginForm);
-      const username = formData.get('username');
-      
-      // You can replace 'Your Username' with the actual username variable
-      welcomeMessage.textContent = `Welcome, ${username}!`;
-      
-      startMineButton.textContent = 'Start Mine';
-      startMineButton.addEventListener('click', function () {
-          // Add your logic to start mining here
-          alert('Mining started!');
-      });
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href');
+            showSection(targetId);
+        });
+    });
 
-      // Append the welcome message and start mine button
-      const loginSection = document.getElementById('login');
-      loginSection.appendChild(welcomeMessage);
-      loginSection.appendChild(startMineButton);
-  });
+    // Code for handling the login form on home.html
+    const loginForm = document.querySelector('#login form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(loginForm);
+            const username = formData.get('username');
+            const password = formData.get('password');
+
+            // Send a POST request to your server to handle login and authentication
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `username=${username}&password=${password}`,
+                });
+
+                const data = await response.json();
+                if (data.message === 'Login successful') {
+                    // Redirect to the dashboard page on successful login
+                    window.location.href = '/dashboard';
+                } else {
+                    // Display an error message on login failure
+                    alert('Login failed. Wrong username or password!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    // Code for the dashboard page (dashboard.html)
+    const startMineButton = document.querySelector('#startMining');
+    if (startMineButton) {
+        startMineButton.addEventListener('click', function () {
+            // Add your logic to start mining here
+            alert('Mining started!');
+        });
+    }
 });

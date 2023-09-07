@@ -1,7 +1,4 @@
 import json
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt()
 
 class Storage:
     def __init__(self, file_path='data.json'):
@@ -11,8 +8,7 @@ class Storage:
     def add_user(self, username, email, password):
         if username in self.users:
             return False
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        self.users[username] = {'email': email, 'password': hashed_password}
+        self.users[username] = {'email': email, 'password': password}
         self.save_data()  # Save updated data to the JSON file
         return True
 
@@ -23,20 +19,13 @@ class Storage:
     def load_data(self):
         try:
             with open(self.file_path, 'r') as file:
-                self.users = json.load(file)
+                data = file.read()
+                if not data:
+                    self.users = {}  # File is empty, initialize an empty dictionary
+                else:
+                    self.users = json.loads(data)
         except FileNotFoundError:
-            self.users = {}
+            self.users = {}  # File doesn't exist, initialize an empty dictionary
 
     def get_user_by_username(self, username):
         return self.users.get(username)
-
-# Define functions to interact with the Storage class
-def save_user_data(username, email, password):
-    storage = Storage()
-    storage.add_user(username, email, password)
-    print(f"User data saved: Username={username}, Email={email}, Password={password}")
-
-def load_user_data():
-    storage = Storage()
-    storage.load_data()
-    return storage.users
