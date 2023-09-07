@@ -13,9 +13,9 @@ Welcome to the Easymine One-Click Cloud Mining project! This project aims to sim
 1. **Installation:** To get started, clone this repository to your local environment.
 
    ```bash
-   git clone https://github.com/your-username/easymine-cloud-mining.git
+   git clone [https://github.com/your-username/easymine-cloud-mining.git](https://github.com/EndesewB/Portfolio-project.git)
    ```
-
+   
 2. **Dependencies:** Ensure you have the required dependencies installed, including Python, Flask, and any cloud service provider tools you intend to use.
 
 3. **Configuration:** Configure your cloud provider settings, API keys, and mining parameters in the project files.
