@@ -1,6 +1,6 @@
 **Easymine One-Click Cloud Mining Project**
 
-![EasyMine Logo](https://github.com/EndesewB/Portfolio-project/blob/master/images/background2.jpg)
+[EasyMine Logo][https://github.com/EndesewB/Portfolio-project/blob/master/images/background2.jpg]
 
 Welcome to the Easymine One-Click Cloud Mining project! This project aims to simplify the process of setting up and managing your own blockchain mining cluster in a cloud environment.
 
