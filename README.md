@@ -1,4 +1,7 @@
+
 **Easymine One-Click Cloud Mining Project**
+
+<img src="./images/background2.jpg" alt="Project Banner" width="100%">
 
 [EasyMine Logo][https://github.com/EndesewB/Portfolio-project/blob/master/images/background2.jpg]
 
