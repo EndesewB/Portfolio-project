@@ -37,7 +37,7 @@ We welcome contributions from the open-source community. Feel free to submit bug
 If you encounter any issues or need assistance, please refer to the project's documentation or open a support ticket on our repository.
 
  **Author(s):**
-- [Mekonen feleke](https://www.linkedin/moki12.com/in)
+- [Mekonen Feleke](https://www.linkedin/moki12.com/in)
 - [Endesew Bantayehu](https://github.com/EndesewB/Portfolio-project/edit/main/README.md)
 
 **License:**
