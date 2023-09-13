@@ -1,0 +1,159 @@
+/* Style for the header */
+header {
+    background-color: #60cf5c;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+}
+
+/* Style for the header title */
+.header-title {
+    text-align: center;
+    flex-grow: 1; 
+}
+
+/* Style for the user icon */
+.user-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Style for the logout button */
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the footer */
+footer {
+    background-color: #2e2b2b;
+    color: #fff;
+    padding: 0px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Style for the container holding the sections */
+.section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+/* Style for each section */
+.section {
+    border: 1px groove #201e20;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* Style for the form elements */
+.section-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+/* Style for buttons */
+.action-button {
+    background-color: #007BFF;
+    color: #fff;
+    border: solid;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Style for input fields */
+.input-field {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+/* Additional styles for specific sections */
+.balance-section, .withdraw-section, .start-mining-section {
+    text-align: center;
+    position: relative;
+    cursor: pointer; 
+    
+}
+
+/* Style for the balance number */
+.balance-number {
+    font-size: 24px;
+    margin-top: 10px;
+    border: 1px groove #201e20;
+}
+
+/* Style for the balance section */
+.balance-section, .withdraw-section, .start-mining-section {
+    text-align: center;
+    position: relative;
+    cursor: pointer; 
+}
+
+/* Style for the tooltip/pop-up container */
+.tooltip {
+    visibility: visible;
+    background-color: #b335b3;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* Show the tooltip/pop-up on hover */
+.balance-section:hover .tooltip,
+.withdraw-section:hover .tooltip,
+.start-mining-section:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Style for the balance number */
+.balance-number {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+/* Additional styles for specific sections */
+.balance-section::before,
+.withdraw-section::before,
+.start-mining-section::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(112, 205, 228, 0.3);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none; 
+}
+
+/* Show the overlay on hover */
+.balance-section:hover::before,
+.withdraw-section:hover::before,
+.start-mining-section:hover::before {
+    opacity: 1;
+}
+body {
+background-color:rgb(235, 224, 236);
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <i class="glyphicon glyphicon-user"></i>
+    <link rel="stylesheet" href="./static/dashboard.css">
+</head>
+<body>
+
+    <header class="header">
+        <a>Welcome, {{ username }}</a>
+        <p>Easymine</p>
+        <a href="/logout">Logout</a>
+    </header>
+
+<div class="section-container">
+    <section class="section balance-section">
+        <h1>Balance</h1>
+        <form class="section-form">
+            <label for="balance">Your Balance:</label>
+            <span class="balance-number">0.0001 BTC</span>
+        </form>
+    </section>
+
+    <section class="section withdraw-section">
+        <h1>Withdraw</h1>
+        <form class="section-form">
+            <button type="button" class="action-button">Withdraw</button>
+            <label for="amount">Amount:</label>
+            <input type="number" class="input-field" id="amount" name="amount" placeholder="Enter amount">
+        </form>
+    </section>
+
+    <section class="section start-mining-section">
+        <h1>Start Mining</h1>
+        <form class="section-form">
+            <button type="button" class="action-button">Start Mining</button>
+            <label for="hash-rate">Hash Rate (MH/s):</label>
+            <input type="number" class="input-field" id="hash-rate" name="hash_rate" placeholder="Enter hash rate">
+        </form>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2023 Easymine. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
