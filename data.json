@@ -14,5 +14,21 @@
     "endex123456": {
         "email": "endesew12@gmail.com",
         "password": "123456"
+    },
+    "demo": {
+        "email": "endesew12@gmail.com",
+        "password": "1234"
+    },
+    "demo2": {
+        "email": "moke@gmail.com",
+        "password": "1234"
+    },
+    "demo3": {
+        "email": "moke@gmail.com",
+        "password": "4321"
+    },
+    "demo4": {
+        "email": "endesew12@gmail.com",
+        "password": "1234"
     }
 }

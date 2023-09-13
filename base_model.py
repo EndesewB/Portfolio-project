@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 class BaseModel:
-    _id_counter = 0  # Class variable to track the next available ID
+    _id_counter = 0  
 
     def __init__(self):
         self.instance_id = BaseModel._id_counter

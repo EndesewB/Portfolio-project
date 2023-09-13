@@ -52,7 +52,7 @@ def login():
     session['username'] = username
     return jsonify({'message': 'Login successful', 'username': username}), 200
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
@@ -64,15 +64,16 @@ def dashboard():
 
     if user_data:
         stored_password = user_data.get('password')
-        print(stored_password)
-        password = request.form.get('password')
-        print(password)
-        
-        if stored_password == password:
-            return render_template('dashboard.html', username=username)
-        else:
-            return jsonify({'error': 'Invalid username or password'}), 401
-        
+
+        if request.method == 'POST':
+            entered_password = request.form.get('password1')
+            if entered_password == stored_password:
+                return render_template('dashboard.html')
+            else:
+                return jsonify({'error': 'Invalid password'}), 401
+
+        return render_template('dashboard.html', username=username)
+    
     return "User not found"
 
 @app.route('/logout')
